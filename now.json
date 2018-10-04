@@ -12,6 +12,7 @@
         "MYSQL_USER":"@appname-mysql-user",
         "MYSQL_PASSWORD":"@appname-mysql-password",
         "MYSQL_DB_NAME":"@appname-mysql-db-name",
-        "ROUTES_PREFIX":""
+        "ROUTES_PREFIX":"",
+        "NODE_ENV":"production"
     }
   }
