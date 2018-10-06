@@ -3,7 +3,8 @@
         "eslint:recommended"
     ],
     "plugins": [
-        "promise"
+        "promise",
+        "flowtype"
     ],
     "parserOptions": {
         "ecmaVersion": 8
