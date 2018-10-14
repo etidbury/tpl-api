@@ -7,7 +7,6 @@
     "node": "10.x.x"
   },
   "scripts": {
-
     "build": "npm run build:reset && $(npm bin)/babel -d ./.build.routes ./routes",
     "build:reset": "rm -rf .build*",
     "deploy": "yarn build:reset && yarn build && now",
