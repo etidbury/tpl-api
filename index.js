@@ -4,20 +4,21 @@ const {
     NODE_ENV,
     HOST,
     PORT,
-    DISABLE_LOGS
+    DISABLE_LOGS,
+    DEBUG
 } = process.env
 
 const isProd = NODE_ENV === 'production'
+const isDebugging = DEBUG && DEBUG.length
 
-if (isProd) {
+if (!global._babelPolyfill)
     require('babel-polyfill')
-}
 
 require('tpl-api-helpers/util/log')
 
 const fastify = require('fastify')()
 
-if (!DISABLE_LOGS){
+if (!DISABLE_LOGS || isDebugging){
     // Pretty prints all available routes ( fastify.blipp() inside callback to fastify.listen() )
     fastify.register(require('fastify-blipp'))
         .after(()=>{   
@@ -49,6 +50,7 @@ if (!PORT || !PORT.length) {
 fastify.setErrorHandler(async (err, req, reply) => {
     console.error(err)
 })
+
 // Start server
 fastify.listen(PORT, HOST || '127.0.0.1', (err, address) => {
     try {
@@ -62,8 +64,9 @@ fastify.listen(PORT, HOST || '127.0.0.1', (err, address) => {
         console.info(`> Ready at ${address}`)
 
     } catch (err) {
-        console.error(err)
+        // eslint-disable-next-line no-console
+        console.log(err)
+        throw err
         // console.trace(err)
-        process.exit(1)
     }
 })

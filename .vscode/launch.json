@@ -5,14 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "ClientLaunch",
+            "name": "DevLaunch",
             "type": "node",
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "runtimeExecutable": "yarn",
             "runtimeArgs": [
                 "dev",
-                "--inspect=9229"
+                "--inspect 9229"
             ],
             "port": 9229,
             "skipFiles": [
@@ -20,26 +20,24 @@
             ]
         },
         {
-            "name": "TestRecommendationLaunch",
             "type": "node",
             "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "runtimeExecutable": "yarn",
-            "runtimeArgs": [
-                "test:recommendation",
-                "--inspect=9224"
-            ],
-            "port": 9224,
-            "skipFiles": [
-                "node_modules/**/*.js"
-            ]
-        },
+            "name": "JestAll",
+            "program": "${workspaceFolder}/node_modules/.bin/jest",
+            "args": ["--runInBand"],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "windows": {
+              "program": "${workspaceFolder}/node_modules/jest/bin/jest",
+            }
+          },
     ],
     "compounds": [
         {
-            "name": "Test Server/Client Debug",
+            "name": "Test API Debug",
             "configurations": [
-                "ClientLaunch"
+                "DevLaunch",
+                "JestAll"
             ]
         }
     ]

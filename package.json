@@ -7,7 +7,8 @@
     "node": "10.x.x"
   },
   "scripts": {
-    "build": "npm run build:reset && $(npm bin)/babel -d ./.build.routes ./routes",
+    "build": "npm run build:reset && NODE_ENV=production $(npm bin)/babel -d ./.build.routes ./routes",
+    "now-build": "npm run build && npm run test:ci",
     "build:reset": "rm -rf .build*",
     "deploy": "yarn build:reset && yarn build && now",
     "flow": "$(npm bin)/flow",
@@ -17,7 +18,7 @@
     "test": "$(npm bin)/jest",
     "test:dev": "NODE_ENV=test node index.js",
     "test:watch": "$(npm bin)/jest --watch --runInBand",
-    "test:ci": "npm run flow && npm run eslint && npm run test",
+    "test:ci": "npm run flow && npm run eslint && touch out.log ; DEBUG=true npm run start > out.log & (tidil check-server --port-env PORT --wait 20 && npm run test) || (tail -n 1000 out.log ; rm out.log ; exit 1)",
     "dev": "$(npm bin)/babel-node index.js",
     "watch": "nodemon --config $(npm root)/tpl-api-helpers/config/nodemon.json --exec babel-node index.js",
     "prod": "npm start",
@@ -30,7 +31,7 @@
     "docker": "npm run docker:build && npm run docker:run",
     "docker:build": "docker build -t \"$(echo $npm_package_name)\" -f $(npm root)/tpl-api-helpers/config/Dockerfile .",
     "docker:run": "docker run -p 4001:80 $(echo $npm_package_name):latest",
-    "docker:mysql": "docker stop local-mysql-server ; docker rm local-mysql-server ; docker run --name local-mysql-server -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=true -e MYSQL_DATABASE=db_$(echo $npm_package_name) -e MYSQL_ROOT_HOST=% -d mysql/mysql-server:5.7 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
+    "docker:mysql": "docker stop local-mysql-server ; docker rm local-mysql-server ; docker run --name local-mysql-server -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=true -e MYSQL_DATABASE=db_$(echo $npm_package_name) -e MYSQL_ROOT_HOST=% -d mysql/mysql-server:5.6 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci ; docker ps"
   },
   "dependencies": {
     "axios": "0.18.0",
@@ -45,7 +46,7 @@
     "fastify-multipart": "0.5.1",
     "fastify-no-icon": "^2.0.0",
     "fastify-sensible": "0.2.0",
-    "tpl-api-helpers": "^0.3.4",
+    "tpl-api-helpers": "^0.5.11",
     "url-join": "4.0.0"
   },
   "devDependencies": {
