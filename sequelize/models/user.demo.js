@@ -1,8 +1,13 @@
 
+// For more info on customEntityProps():
+// @link https://github.com/etidbury/tpl-api-helpers/blob/master/docs/sequelize.md
+
+const { customEntityProps } = require('tpl-api-helpers/util/sequelize')
+
 module.exports = (sequelize, DataTypes) => {
     let User = sequelize.define(
         'User',
-        {
+        customEntityProps({
             username: DataTypes.STRING,
             createdAt: {
                 type: DataTypes.DATE,
@@ -15,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
                     // ' ON UPDATE CURRENT_TIMESTAMP' not supported by SQLite
                 )
             }
-        },
+        }),
         { timestamps: true }
     )
 
