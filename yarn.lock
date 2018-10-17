@@ -5871,10 +5871,10 @@ tough-cookie@>=2.3.3, tough-cookie@^2.3.4, tough-cookie@~2.4.3:
     psl "^1.1.24"
     punycode "^1.4.1"
 
-tpl-api-helpers@^0.5.11:
-  version "0.5.11"
-  resolved "https://registry.yarnpkg.com/tpl-api-helpers/-/tpl-api-helpers-0.5.11.tgz#c36f2796b78bc4df11af9be6db96ca7132162a80"
-  integrity sha512-fN4XAL9gKatRa/LA5rSr7VEIsKKXYozZkCMd1xTuEdBaxllpwcs9hGvOtnKPQ7mQPWTYsMf5NqTbXJVgOCiUaA==
+tpl-api-helpers@^0.5.12:
+  version "0.5.12"
+  resolved "https://registry.yarnpkg.com/tpl-api-helpers/-/tpl-api-helpers-0.5.12.tgz#541629c0f32893f5f64fd559a9286dc47f203c68"
+  integrity sha512-Ge5aLptDaVIFmlWNbflgCbFd+UJvmR+WQXQZ/hY0n8i7vwldMyKm8Rfjc7LccIdAqo2Ok+OKQcKZAb0t6eFqxQ==
   dependencies:
     "@etidbury/jwtauth" "^0.0.4"
     dotenv "^6.1.0"

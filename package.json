@@ -46,7 +46,7 @@
     "fastify-multipart": "0.5.1",
     "fastify-no-icon": "^2.0.0",
     "fastify-sensible": "0.2.0",
-    "tpl-api-helpers": "^0.5.11",
+    "tpl-api-helpers": "^0.5.12",
     "url-join": "4.0.0"
   },
   "devDependencies": {
