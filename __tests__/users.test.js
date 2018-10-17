@@ -1,14 +1,17 @@
 /* eslint-env jest */
 require('dotenv').config()
 import Client from 'lib/Client'
-
-const urljoin = require('url-join')
-const expect  = require('chai').expect
+import urljoin from 'url-join'
+import { expect } from 'chai'
 
 const {
     PORT,
     HOST
 } = process.env
+
+if (!PORT?.length){
+    throw new TypeError('Required environment variables not set: PORT')
+}
 
 const clientUrl = `http://${HOST || 'localhost'}:${PORT}`
 
